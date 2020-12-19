@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bloc/bloc/NewsStates.dart';
 
 class LoadedView extends StatelessWidget {
+  final NewsState state;
+
+  LoadedView(this.state);
+
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("loaded"));
+    return ListView(
+      children: <Widget>[],
+    );
   }
 }
