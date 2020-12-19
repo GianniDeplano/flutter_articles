@@ -7,17 +7,19 @@ import 'package:sample_bloc/views/homepage/EmptyView.dart';
 import 'package:sample_bloc/views/homepage/ErrorView.dart';
 import 'package:sample_bloc/views/homepage/LoadedNews.dart';
 import 'package:sample_bloc/views/homepage/LoadingView.dart';
+import 'package:share/share.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  static final String route = "homepage";
+  HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,16 +50,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Container())),
                           Expanded(
                               flex: 5,
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 15),
-                                  child: Icon(
-                                    CupertinoIcons.share,
-                                    color: Colors.white,
-                                    size: 24,
+                              child: GestureDetector(
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: Icon(
+                                      CupertinoIcons.share,
+                                      color: Colors.white,
+                                      size: 24,
+                                    ),
                                   ),
                                 ),
+                                onTap: () {
+                                  Share.share("MEDIUM_URL",
+                                      subject: "MEDIUM ARTICLE TITLE");
+                                },
                               )),
                         ]))),
                 Align(
@@ -90,12 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           topRight: const Radius.circular(40.0),
                         )),
                     height: 400,
-                    child:
-                        /*ListView(
-                        padding: 
-                        children: <Widget>[])*/
-
-                        Padding(
+                    child: Padding(
                       padding: const EdgeInsets.only(
                           top: 30, left: 10, right: 10, bottom: 10),
                       child: BlocConsumer<NewsBloc, NewsState>(
@@ -120,10 +123,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-/*
-return Scaffold(
-        appBar: AppBar(
-          title: Text("News App"),
-        ),
-        body: ;*/
