@@ -14,7 +14,8 @@ class TheGuardianClient {
   TheGuardianClient(@required this.apikey) : assert(apikey != null);
 
   Future<List<SearchApiItemModel>> getItems(String topic) async {
-    var url = "$baseUrl/search?$apiKeyParam=$apikey&$queryParam=\"$topic\"";
+    var url =
+        "$baseUrl/search?$apiKeyParam=$apikey&$queryParam=\"$topic\"&&order-by=newest";
     var response = await http.get(url);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
